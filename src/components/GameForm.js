@@ -40,7 +40,8 @@ export default function GameForm({ account }) {
     }
 
     try {
-      await sendTransaction(account, 'YOUR_RECEIVING_ETH_ADDRESS', depositAmount);
+      const dealerAddress = process.env.NEXT_PUBLIC_DEALER_ADDRESS; // Fetch dealer address from environment variable
+      await sendTransaction(account, dealerAddress, depositAmount);
       setSuccessMessage(`You bet on ${selectedColor}! Waiting for transaction confirmation...`);
       setErrorMessage('');
     } catch (error) {

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import EnsureMetaMask from '../components/EnsureMetaMask';
 import ConnectWallet from '../components/ConnectWallet';
 import GameForm from '../components/GameForm';
+import Pot from '../components/Pot';  // Import the Pot component
 import { initializeWeb3, connectWallet } from '../services/Web3Service';
 
 export default function Home() {
@@ -51,13 +52,17 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
+
       {/* 1. Check if MetaMask is installed */}
       {!isMetaMaskInstalled && <EnsureMetaMask />}
 
       {/* 2. If MetaMask is installed but not connected, show connect button after 1 second */}
       {isMetaMaskInstalled && !account && showConnectWallet && <ConnectWallet onConnect={handleConnectWallet} />}
 
-      {/* 3. If MetaMask is installed and connected, show the game form */}
+      {/* 3. Show the pot balance (dealer's ETH balance) */}
+      {isMetaMaskInstalled && <Pot />}
+
+      {/* 4. If MetaMask is installed and connected, show the game form */}
       {isMetaMaskInstalled && account && <GameForm account={account} />}
     </div>
   );
