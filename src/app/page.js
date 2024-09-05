@@ -1,9 +1,10 @@
+import WalletConnect from '../components/WalletConnect';
+
 export default function Home() {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <h1 className="text-3xl font-bold text-blue-500">
-        Welcome to Ethereum Roulette!
-      </h1>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <h1 className="text-4xl font-bold mb-8">E.R.</h1>
+      <WalletConnect />
     </div>
   );
 }
