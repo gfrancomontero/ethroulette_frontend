@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import EnsureMetaMask from '@/components/enforcers/EnsureMetaMask';
 import EnsureWalletConnected from '@/components/enforcers/EnsureWalletConnected';
 import { checkWalletConnection, handleConnectWallet } from '@/redux/actions/metaMaskActions';  // Import your async actions
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Home() {
   return (
@@ -31,7 +32,21 @@ function Content() {
 
   const isMetaMaskInstalled = useSelector((state) => state.metaMask.isMetaMaskInstalled);
   const account = useSelector((state) => state.metaMask.account);
+  const metaMaskTransactionIsLoading = useSelector((state) => state.metaMask.metaMaskTransactionIsLoading);  // Get the transaction loading state
 
+  // If MetaMask transaction is loading, show a full-screen spinner
+  if (metaMaskTransactionIsLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-col jca">
+          <CircularProgress color="success" />
+          <p>Validating Transaction</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Otherwise, show the regular content
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       {isMetaMaskInstalled ? (

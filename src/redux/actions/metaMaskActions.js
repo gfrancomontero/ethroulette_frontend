@@ -1,5 +1,5 @@
-import { initializeWeb3, connectWallet } from '@/services/Web3Service';  // Import Web3Service functions
-import { setMetaMaskInstalled, setAccount, clearAccount, setBalance, setError, setLoading } from '../slices/metaMaskSlice';
+import { initializeWeb3, connectWallet, sendTransaction } from '@/services/Web3Service';  // Import Web3Service functions
+import { setMetaMaskInstalled, setAccount, clearAccount, setBalance, setError, setLoading, setMetaMaskTransactionLoading } from '../slices/metaMaskSlice';
 
 // Redux Thunk to check if MetaMask is installed and whether the wallet is connected
 export const checkWalletConnection = () => async (dispatch) => {
@@ -78,5 +78,22 @@ export const handleConnectWallet = () => async (dispatch) => {
   } catch (error) {
     console.error('Failed to connect wallet:', error);
     dispatch(setError('Failed to connect wallet.'));
+  }
+};
+
+// Redux Thunk to handle a MetaMask transaction
+export const handleMetaMaskTransaction = (account, toAddress, amount) => async (dispatch) => {
+  dispatch(setMetaMaskTransactionLoading(true));  // Start transaction loading state
+  try {
+    // Perform the transaction via Web3Service
+    await sendTransaction(account, toAddress, amount);
+
+    dispatch(setMetaMaskTransactionLoading(false));  // Stop transaction loading state
+    window.location.reload();  // Reload the page after the transaction
+
+  } catch (error) {
+    dispatch(setError('Transaction failed.'));  // Dispatch error to Redux
+    dispatch(setMetaMaskTransactionLoading(false));  // Ensure loading state is stopped on failure
+    console.error('Transaction failed:', error);
   }
 };

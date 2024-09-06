@@ -6,7 +6,8 @@ const initialState = {
   account: null,  // Account will be null until a wallet is connected
   balance: 0,     // User's balance on Ethereum Roulette
   error: null,    // To track any errors related to balance fetching
-  loading: false  // Add a loading state for balance fetching
+  loading: false,  // Loading state for balance fetching
+  metaMaskTransactionIsLoading: false, // Loading state for MetaMask transactions
 };
 
 // Create the MetaMask slice
@@ -32,11 +33,14 @@ const metaMaskSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;  // Manage the loading state
     },
+    setMetaMaskTransactionLoading(state, action) {
+      state.metaMaskTransactionIsLoading = action.payload;  // Update transaction loading state
+    },
   }
 });
 
 // Export the actions generated from the slice
-export const { setMetaMaskInstalled, setAccount, clearAccount, setBalance, setError, setLoading } = metaMaskSlice.actions;
+export const { setMetaMaskInstalled, setAccount, clearAccount, setBalance, setError, setLoading, setMetaMaskTransactionLoading } = metaMaskSlice.actions;
 
 // Export the reducer to be used in the store
 export default metaMaskSlice.reducer;

@@ -29,7 +29,8 @@ export default function DepositComponent() {
     <div className="text-center p-2 text-center w-full">
       <h3 className="text-sm font-overpass">Your Wallet:</h3>
       <p className="text-blue-500 font-mono break-all">
-        {account.slice(0, 5)}...{account.slice(account.length - 5, account.length)}
+        {/* {account.slice(0, 5)}...{account.slice(account.length - 5, account.length)} */}
+        {account}
       </p>
 
       {/* Show MetaMask balance */}
