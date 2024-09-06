@@ -1,4 +1,4 @@
-// services/Web3Service.js
+// src/app/services/Web3Service.js
 
 import Web3 from 'web3';
 

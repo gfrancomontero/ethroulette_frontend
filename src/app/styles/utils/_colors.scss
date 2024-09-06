@@ -1,0 +1,28 @@
+.text-pink {
+  color: $primary-color;
+}
+.hover-text-pink {
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.border-1-pink {
+  border: 2px solid $primary-color;
+}
+
+.border-b-1-pink {
+  border-bottom: 2px solid $primary-color;
+}
+
+.text-green {
+  color: $secondary-color;
+}
+
+.border-1-pink {
+  border: 2px solid $primary-color;
+}
+
+.bg-pink {
+  background-color: rgba(255, 30, 105, 0.329);
+}

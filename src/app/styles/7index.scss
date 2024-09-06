@@ -1,0 +1,32 @@
+// Importing utility classes, mixins, and functions
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/functions';
+@import 'utils/colors';
+
+// Importing base styles
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/base';
+
+// Importing components
+@import 'components/button';
+@import 'components/spinner';
+
+// Importing layout styles
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/grid';
+@import 'layout/flex';
+
+// Importing page-specific styles
+@import 'pages/about';
+@import 'pages/contact';
+
+// Importing theme styles
+@import 'themes/light';
+@import 'themes/dark';
+
+
+// Importing vendor styles
+@import 'vendors/normalize';

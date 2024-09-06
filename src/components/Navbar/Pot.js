@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Web3 from 'web3';
+import Link from 'next/link'
 
 export default function Pot() {
   const [potBalance, setPotBalance] = useState(0);
@@ -20,9 +21,10 @@ export default function Pot() {
   }, [DEALER_ADDRESS]);
 
   return (
-    <div className="text-center p-4 bg-gray-100 rounded-md shadow-lg mb-6">
-      <h3 className="text-lg font-semibold">Current Pot Balance</h3>
+    <div className="p-2 w-full text-start">
+      <p className="text-sm font-overpass">Page Balance:</p>
       <p className="text-blue-500 font-mono">{potBalance} ETH</p>
+      <Link className="font-overpass text-xs whitespace-nowrap underline" href={`https://etherscan.io/address/${DEALER_ADDRESS}`} target="_blank">Check on Etherscan</Link>
     </div>
   );
 }

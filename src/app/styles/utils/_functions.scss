@@ -1,0 +1,16 @@
+
+.rb {
+  outline: 3px  solid red;
+}
+
+.bgcr {
+  background-color: red !important;
+}
+
+.transition-ease {
+  transition: all 0.2s ease;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}

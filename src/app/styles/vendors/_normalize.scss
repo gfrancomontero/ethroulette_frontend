@@ -1,0 +1,4 @@
+//remove the algolia cross
+.ais-SearchBox-input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
