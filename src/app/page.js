@@ -1,6 +1,6 @@
 'use client';  // Ensure this is a client-side component
 
-import ClientProvider from '@/components/ClientProvider';  // Your wrapper for client components
+import ClientProvider from './ClientProvider';  // Your wrapper for client components
 import Navbar from '@/components/Navbar';
 
 export default function Home() {
