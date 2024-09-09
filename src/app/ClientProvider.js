@@ -1,9 +1,14 @@
-'use client';  // This ensures the component runs on the client-side
+// src/app/ClientProvider.js
 
-import { Provider } from 'react-redux';
-import store from '../redux/store';  // Import your Redux store
+'use client';  // Ensure this is client-side
 
-// This component wraps its children in the Redux Provider
+import { Provider } from 'react-redux';  // Import Redux Provider
+import { store } from '@/redux/store';   // Import the Redux store
+
 export default function ClientProvider({ children }) {
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <Provider store={store}>
+      {children} {/* Wrap everything inside Redux Provider */}
+    </Provider>
+  );
 }

@@ -1,3 +1,4 @@
+// src/components/Navbar/UserWallet.js
 
 export default function DepositComponent() {
   return (
@@ -11,8 +12,6 @@ export default function DepositComponent() {
       <p className={`text-sm font-overpass mt-2 text-${0 == 0 ? 'red' : 'green'}-500`}>
         MetaMask Balance: X ETH
       </p>
-
-      {/* Display error message if any */}
     </div>
   );
 }

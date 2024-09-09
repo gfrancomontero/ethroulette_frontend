@@ -23,7 +23,7 @@ export default function DealerBalance() {
 
   return (
     <div className="w-full text-start">
-      <p className="text-sm font-overpass">Balance Information:</p>
+      <p className="text-sm font-overpass">Balance Under Management:</p>
 
       {loading ? (
         <p className="text-gray-500">Loading...</p>
