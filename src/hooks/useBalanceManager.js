@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { useDispatch } from 'react-redux';
-import { setDealerBalance, setConnectionStatus } from '../redux/slices/dealerBalanceSlice';
+import { setDealerBalance, setTotalUserBalances, setEffectivetotalBalance, setConnectionStatus } from '../redux/slices/dealerBalanceSlice';
 
 const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_BACKEND_API;
 
@@ -12,7 +12,7 @@ const fetchWebSocketToken = async () => {
   return data.token;
 };
 
-export const useDealerBalance = () => {
+export const useBalanceManager = () => {
   const dispatch = useDispatch();
   const [socket, setSocket] = useState(null);  // Save the socket connection in state
 
@@ -20,8 +20,6 @@ export const useDealerBalance = () => {
     // Fetch the WebSocket token from the API route
     const connectSocket = async () => {
       const token = await fetchWebSocketToken();
-      console.log('bananas', token)
-
 
       // Initialize the WebSocket connection with the token
       const socket = io(SOCKET_SERVER_URL, {
@@ -36,10 +34,15 @@ export const useDealerBalance = () => {
         dispatch(setConnectionStatus(true));  // Update connection status in Redux
       });
 
-      // Listen for dealerBalance updates
-      socket.on('dealerBalance', (newBalance) => {
-        console.log('Received dealerBalance update:', newBalance);
-        dispatch(setDealerBalance(newBalance));  // Update dealer balance in Redux
+      // Listen for balancesManager updates
+      socket.on('balancesManager', (balances) => {
+        console.log('Received balancesManager update:', balances);
+        const { walletBalance, totalUserBalances, effectiveBalancesManager } = balances;
+
+        // Dispatch the balances to the Redux store
+        dispatch(setDealerBalance(walletBalance));  // Update dealer balance
+        dispatch(setTotalUserBalances(totalUserBalances));  // Update total user balances
+        dispatch(setEffectivetotalBalance(effectiveBalancesManager));  // Update effective balance
       });
 
       // Handle socket disconnection

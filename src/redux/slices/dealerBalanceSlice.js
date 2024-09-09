@@ -1,9 +1,9 @@
-// src/redux/slices/dealerBalanceSlice.js
-
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   balance: null,
+  totalUserBalances: null,
+  effectiveDealerBalance: null,
   isConnected: false,
 };
 
@@ -14,11 +14,17 @@ const dealerBalanceSlice = createSlice({
     setDealerBalance: (state, action) => {
       state.balance = action.payload;
     },
+    setTotalUserBalances: (state, action) => {
+      state.totalUserBalances = action.payload;
+    },
+    setEffectivetotalBalance: (state, action) => {
+      state.effectiveDealerBalance = action.payload;
+    },
     setConnectionStatus: (state, action) => {
       state.isConnected = action.payload;
     }
   }
-})
+});
 
-export const { setDealerBalance, setConnectionStatus } = dealerBalanceSlice.actions;
+export const { setDealerBalance, setTotalUserBalances, setEffectivetotalBalance, setConnectionStatus } = dealerBalanceSlice.actions;
 export default dealerBalanceSlice.reducer;
