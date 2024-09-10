@@ -7,7 +7,8 @@ import metaMaskUserBalanceReducer from '../slices/metaMaskUserBalanceSlice'; // 
 const rootReducer = combineReducers({
   dealerBalance: dealerBalanceReducer,
   metaMaskValidation: metaMaskValidationReducer,
-  metaMaskUserBalance: metaMaskUserBalanceReducer, // Add it here
+  metaMaskUser: metaMaskUserBalanceReducer,  // Ensure this key matches the one used in the component's useSelector
+
 });
 
 export default rootReducer;

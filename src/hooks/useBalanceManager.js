@@ -1,3 +1,4 @@
+// src/hooks/useBalanceManager.js
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { useDispatch } from 'react-redux';

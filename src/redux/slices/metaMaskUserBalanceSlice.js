@@ -1,11 +1,26 @@
-// src/redux/slices/metaMaskUserBalanceSlice.js
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAccountBalance } from '../../services/web3';
+import { getAccountBalance, connectWallet, initializeWeb3 } from '../../services/web3';
+
+// Async thunk to connect MetaMask and get account
+export const connectMetaMask = createAsyncThunk(
+  'metaMaskUser/connectMetaMask',
+  async (_, thunkAPI) => {
+    try {
+      const initialized = initializeWeb3();
+      if (!initialized) {
+        throw new Error('MetaMask is not installed');
+      }
+      const account = await connectWallet();
+      return account; // Return the connected account
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 // Async thunk to fetch MetaMask balance
 export const fetchMetaMaskBalance = createAsyncThunk(
-  'metaMaskUserBalance/fetchBalance',
+  'metaMaskUser/fetchBalance',
   async (account, thunkAPI) => {
     try {
       const balance = await getAccountBalance(account);
@@ -17,8 +32,9 @@ export const fetchMetaMaskBalance = createAsyncThunk(
 );
 
 const metaMaskUserBalanceSlice = createSlice({
-  name: 'metaMaskUserBalance',
+  name: 'metaMaskUser',
   initialState: {
+    account: null,
     balance: 0,
     loading: false,
     error: null,
@@ -28,10 +44,22 @@ const metaMaskUserBalanceSlice = createSlice({
       state.balance = 0;
       state.error = null;
       state.loading = false;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(connectMetaMask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(connectMetaMask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.account = action.payload;
+      })
+      .addCase(connectMetaMask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || 'Failed to connect MetaMask';
+      })
       .addCase(fetchMetaMaskBalance.pending, (state) => {
         state.loading = true;
         state.error = null;
