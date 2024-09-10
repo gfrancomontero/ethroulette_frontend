@@ -1,13 +1,13 @@
-// src/redux/reducers/index.js
-
 import { combineReducers } from '@reduxjs/toolkit';
 import dealerBalanceReducer from '../slices/dealerBalanceSlice';
-import metaMaskValidationReducer from '../slices/metaMaskValidationSlice';  // Import the new slice
+import metaMaskValidationReducer from '../slices/metaMaskValidationSlice';
+import metaMaskUserBalanceReducer from '../slices/metaMaskUserBalanceSlice'; // Import the new reducer
 
-// Combine all reducers (you can add more here in the future)
+// Combine all reducers
 const rootReducer = combineReducers({
   dealerBalance: dealerBalanceReducer,
-  metaMaskValidation: metaMaskValidationReducer,  // Add the new reducer
+  metaMaskValidation: metaMaskValidationReducer,
+  metaMaskUserBalance: metaMaskUserBalanceReducer, // Add it here
 });
 
 export default rootReducer;

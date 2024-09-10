@@ -1,3 +1,5 @@
+// src/components/Navbar/BalanceManager.js
+
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useBalanceManager } from '../../hooks/useBalanceManager.js';  // Correct hook import
