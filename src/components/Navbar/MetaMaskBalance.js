@@ -6,7 +6,7 @@ export default function MetaMaskBalance() {
   const dispatch = useDispatch();
   const { account, balance, loading, error } = useSelector((state) => state.metaMaskUser);
 
-  // IF no metamsk connected, connect MetaMask and fetch account on component mount
+  // Connect MetaMask and fetch account on component mount
   useEffect(() => {
     if (!account) {
       dispatch(connectMetaMask());  // Connect to MetaMask and store the account in Redux
@@ -19,6 +19,37 @@ export default function MetaMaskBalance() {
       dispatch(fetchMetaMaskBalance(account));  // Fetch balance using Redux when account is set
     }
   }, [account, dispatch]);
+
+  // MetaMask event listeners for account and network changes
+  useEffect(() => {
+    const { ethereum } = window;
+
+    if (ethereum && ethereum.on) {
+      const handleAccountsChanged = (accounts) => {
+        if (accounts.length > 0) {
+          dispatch(connectMetaMask());  // Update account and fetch balance when account changes
+        }
+      };
+
+      const handleChainChanged = () => {
+        window.location.reload();  // Reload page when network is changed (optional, can be improved)
+      };
+
+      // Listen for MetaMask account change
+      ethereum.on('accountsChanged', handleAccountsChanged);
+
+      // Listen for MetaMask network change
+      ethereum.on('chainChanged', handleChainChanged);
+
+      // Clean up the event listeners on component unmount
+      return () => {
+        if (ethereum.removeListener) {
+          ethereum.removeListener('accountsChanged', handleAccountsChanged);
+          ethereum.removeListener('chainChanged', handleChainChanged);
+        }
+      };
+    }
+  }, [dispatch]);
 
   if (loading) {
     return <p>Loading balance...</p>;
