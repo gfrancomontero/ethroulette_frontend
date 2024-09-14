@@ -37,7 +37,7 @@ export const useBalanceManager = () => {
 
       // Listen for balancesManager updates
       socket.on('balancesManager', (balances) => {
-        console.log('Received balancesManager update:', balances);
+        // console.log('Received balancesManager update:', balances);
         const { walletBalance, totalUserBalances, effectiveBalancesManager } = balances;
 
         // Dispatch the balances to the Redux store

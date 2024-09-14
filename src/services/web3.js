@@ -1,3 +1,4 @@
+// src/services/web3.js
 import Web3 from 'web3';
 
 let web3;
@@ -26,5 +27,28 @@ export const getAccountBalance = async (account) => {
     return web3.utils.fromWei(balance, 'ether');  // Convert balance to ETH
   } catch (error) {
     throw new Error('Failed to get balance');
+  }
+};
+
+// when user deposits from metamask, we 
+export const sendTransaction = async (from, to, amount) => {
+  try {
+    const valueInWei = web3.utils.toWei(amount, 'ether');  // Convert amount to Wei
+
+    const transaction = await web3.eth.sendTransaction({
+      from,
+      to,
+      value: valueInWei,
+      gas: 21000  // Set a standard gas limit for ETH transfers
+    });
+
+    return {
+      from: transaction.from,
+      to: transaction.to,
+      transactionHash: transaction.transactionHash,
+      amount,
+    };
+  } catch (error) {
+    throw new Error(`Transaction failed: ${error.message}`);
   }
 };
