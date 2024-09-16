@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { useDispatch } from 'react-redux';
 import { setDealerBalance, setTotalUserBalances, setEffectivetotalBalance, setConnectionStatus } from '../redux/slices/dealerBalanceSlice';
+import { useSelector } from 'react-redux';
+import { store } from '@/redux/store';  // Adjust this path to where your store is
+import { setUserBalance } from '@/redux/slices/userBalanceSlice';  // Adjust the path as necessary
 
 const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
@@ -13,9 +16,10 @@ const fetchWebSocketToken = async () => {
 };
 
 export const useBalanceManager = () => {
+  const { account } = useSelector((state) => state.metaMaskUser);  // Get wallet address from Redux state
   const dispatch = useDispatch();
   const [socket, setSocket] = useState(null);  // Save the socket connection in state
-
+  
   useEffect(() => {
     // Fetch the WebSocket token from the API route
     const connectSocket = async () => {
@@ -32,17 +36,28 @@ export const useBalanceManager = () => {
       socket.on('connect', () => {
         console.log('Connected to WebSocket server');
         dispatch(setConnectionStatus(true));  // Update connection status in Redux
+        
+        // Send the account (wallet address) after connection
+        if (account) {
+          console.log(`Sending wallet address: ${account}`);
+          socket.emit('subscribeToUserBalance', { walletAddress: account });  // Emit wallet address to server
+        }
       });
 
       // Listen for balancesManager updates
       socket.on('balancesManager', (balances) => {
-        // console.log('Received balancesManager update:', balances);
-        const { walletBalance, totalUserBalances, effectiveBalancesManager } = balances;
+        const { walletBalance, totalUserBalances, effectiveBalancesManager, userBalance } = balances;
 
         // Dispatch the balances to the Redux store
         dispatch(setDealerBalance(walletBalance));  // Update dealer balance
         dispatch(setTotalUserBalances(totalUserBalances));  // Update total user balances
         dispatch(setEffectivetotalBalance(effectiveBalancesManager));  // Update effective balance
+        
+        // If userBalance is received, handle it (optional)
+        if (userBalance > 0) {
+          // THIS CONSTANTLY UPDATES THE STATE OF USERBALANCE IN REDUX EVERY TIME BACKEND SENDS UPDATE.
+          store.dispatch(setUserBalance(userBalance));
+        }
       });
 
       // Handle socket disconnection
@@ -65,7 +80,7 @@ export const useBalanceManager = () => {
     return () => {
       if (socket) socket.disconnect();
     };
-  }, [dispatch]);
+  }, [dispatch, account]);
 
   return { socket };
 };

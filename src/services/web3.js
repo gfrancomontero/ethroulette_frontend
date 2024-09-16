@@ -1,6 +1,8 @@
 // src/services/web3.js
 
 import Web3 from 'web3';
+import { store } from '@/redux/store';  // Adjust this path to where your store is
+import { setUserBalance } from '@/redux/slices/userBalanceSlice';  // Adjust the path as necessary
 
 let web3;
 
@@ -21,11 +23,11 @@ export const connectWalletAndLogin = async () => {
         throw new Error('MetaMask is not installed');
       }
     }
-
+    
     // Request account access
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const walletAddress = accounts[0];
-
+    
     // Send walletAddress to the back-end login route
     const response = await fetch('/api/verifyUser', {
       method: 'POST',
@@ -34,8 +36,9 @@ export const connectWalletAndLogin = async () => {
       },
       body: JSON.stringify({ walletAddress }),
     });
-
+    
     const data = await response.json();
+    store.dispatch(setUserBalance(data.userBalance));
 
     if (!response.ok) {
       throw new Error(data.message || 'Failed to login user');

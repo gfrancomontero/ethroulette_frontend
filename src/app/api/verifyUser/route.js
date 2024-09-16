@@ -34,7 +34,8 @@ export async function POST(request) {
 
     // Log the response status and data for debugging (optional)
     console.log('Backend response status:', response.status);
-    console.log('Backend response data:', responseData);
+    console.log('User Verified. Account Balance:', responseData.userBalance);
+
 
     if (!response.ok) {
       // Forward the error message from the backend
