@@ -1,10 +1,9 @@
-// src/hooks/useBalanceManager.js
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { useDispatch } from 'react-redux';
 import { setDealerBalance, setTotalUserBalances, setEffectivetotalBalance, setConnectionStatus } from '../redux/slices/dealerBalanceSlice';
 
-const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_BACKEND_API;
+const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 // Function to get the WebSocket token from the API route
 const fetchWebSocketToken = async () => {

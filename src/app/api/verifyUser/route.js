@@ -12,7 +12,7 @@ export async function POST(request) {
     }
 
     // Fetch the backend API URL and API KEY from environment variables
-    const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API;
+    const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
     const apiKey = process.env.BACKEND_API_KEY;
 
     // Log for debugging (optional)

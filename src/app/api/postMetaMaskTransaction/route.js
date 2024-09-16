@@ -10,7 +10,7 @@ export async function POST(request) {
     console.log('Next Server has received transaction data:', transaction);
     
     // Fetch the backend API URL and API KEY from env 
-    const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API;
+    const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
     const apiKey = process.env.BACKEND_API_KEY;
 
     // Log the backend URL and API key for debugging
