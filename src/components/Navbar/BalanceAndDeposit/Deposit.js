@@ -1,6 +1,6 @@
 // src/components/Navbar/BalanceAndDeposit/Deposit.js
 import { useState } from 'react';
-import { initializeWeb3, connectWallet, getAccountBalance, sendTransaction } from '@/services/web3';
+import { initializeWeb3, connectWalletAndLogin, getAccountBalance, sendTransaction } from '@/services/web3';
 import config from '@/config/config';  // Import configuration
 
 export default function Deposit() {
@@ -57,7 +57,7 @@ export default function Deposit() {
       }
 
       // Connect to the wallet
-      const from = await connectWallet();
+      const from = await connectWalletAndLogin();
 
       // Get account balance
       const balanceInEther = await getAccountBalance(from);

@@ -1,3 +1,5 @@
+// src/components/Navbar/BalanceAndDeposit/Balance.js
+
 export default function Balance({ account }) {
 
   return (

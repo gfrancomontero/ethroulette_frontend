@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAccountBalance, connectWallet, initializeWeb3 } from '../../services/web3';
+import { getAccountBalance, connectWalletAndLogin, initializeWeb3 } from '../../services/web3';
 
 // Async thunk to connect MetaMask and get account
 export const connectMetaMask = createAsyncThunk(
@@ -10,7 +10,7 @@ export const connectMetaMask = createAsyncThunk(
       if (!initialized) {
         throw new Error('MetaMask is not installed');
       }
-      const account = await connectWallet();
+      const account = await connectWalletAndLogin();
       return account; // Return the connected account
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

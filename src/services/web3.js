@@ -1,4 +1,5 @@
 // src/services/web3.js
+
 import Web3 from 'web3';
 
 let web3;
@@ -11,35 +12,61 @@ export const initializeWeb3 = () => {
   return false;
 };
 
-export const connectWallet = async () => {
+export const connectWalletAndLogin = async () => {
   try {
+    // Initialize web3 if not already initialized
+    if (!web3) {
+      const initialized = initializeWeb3();
+      if (!initialized) {
+        throw new Error('MetaMask is not installed');
+      }
+    }
+
+    // Request account access
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    return accounts[0];  // Return the first account (connected wallet)
+    const walletAddress = accounts[0];
+
+    // Send walletAddress to the back-end login route
+    const response = await fetch('/api/verifyUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ walletAddress }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to login user');
+    }
+
+    // Return the wallet address and any data from the back-end (e.g., userBalance)
+    return walletAddress;
   } catch (error) {
-    throw new Error('Failed to connect wallet');
+    throw new Error(error.message || 'Failed to connect and login');
   }
 };
 
-// Ensure this function is properly defined and exported
+// Other functions remain unchanged
 export const getAccountBalance = async (account) => {
   try {
-    const balance = await web3.eth.getBalance(account);  // Get balance in Wei
-    return web3.utils.fromWei(balance, 'ether');  // Convert balance to ETH
+    const balance = await web3.eth.getBalance(account); // Get balance in Wei
+    return web3.utils.fromWei(balance, 'ether'); // Convert balance to ETH
   } catch (error) {
     throw new Error('Failed to get balance');
   }
 };
 
-// when user deposits from metamask, we 
 export const sendTransaction = async (from, to, amount) => {
   try {
-    const valueInWei = web3.utils.toWei(amount, 'ether');  // Convert amount to Wei
+    const valueInWei = web3.utils.toWei(amount, 'ether'); // Convert amount to Wei
 
     const transaction = await web3.eth.sendTransaction({
       from,
       to,
       value: valueInWei,
-      gas: 21000  // Set a standard gas limit for ETH transfers
+      gas: 21000, // Standard gas limit for ETH transfers
     });
 
     return {
