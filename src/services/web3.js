@@ -9,6 +9,15 @@ let web3;
 export const initializeWeb3 = () => {
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
+
+    // Listen for account changes and reload the page
+    window.ethereum.on('accountsChanged', (accounts) => {
+      if (accounts.length > 0) {
+        // Reload the page to reset session for new account
+        window.location.reload();
+      }
+    });
+
     return true;
   }
   return false;
