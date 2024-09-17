@@ -8,7 +8,7 @@ import EnsureWalletConnected from '@/components/enforcers/EnsureWalletConnected'
 import ClientProvider from './ClientProvider';  // Your wrapper for client components
 import Navbar from '@/components/Navbar';
 import EnsureMetaMask from '@/components/enforcers/EnsureMetaMask';
-
+import { referralManager } from '@/services/cookieJar';
 export default function Home() {
   return (
     <ClientProvider>  {/* Wrap with ClientProvider to ensure Redux and other client-side logic */}
@@ -17,18 +17,20 @@ export default function Home() {
   );
 }
 
+
 function HomeContent() {
   const dispatch = useDispatch();
-
+  
   // Select MetaMask and wallet connection state from Redux
   const isMetaMaskInstalled = useSelector((state) => state.metaMaskValidation.isMetaMaskInstalled);
   const isWalletConnected = useSelector((state) => state.metaMaskValidation.isWalletConnected);
-
+  
   // State to track if we are in a "loading" grace period to prevent flickering
   const [isLoading, setIsLoading] = useState(true);  // Initial loading state
-
+  
   // Check MetaMask installation and wallet connection status on component mount
   useEffect(() => {
+    referralManager();
     dispatch(checkMetaMaskStatus());
     const stopMonitoring = dispatch(monitorMetaMaskInstallation());
 

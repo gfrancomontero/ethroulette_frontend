@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
   try {
     // Parse the walletAddress from the request body
-    const { walletAddress } = await request.json();
+    const { walletAddress, referralCode } = await request.json();
 
     if (!walletAddress) {
       return NextResponse.json({ message: 'Wallet address is required' }, { status: 400 });
@@ -26,7 +26,7 @@ export async function POST(request) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({ walletAddress }),
+      body: JSON.stringify({ walletAddress, referralCode }),
     });
 
     // Parse the response from the backend
