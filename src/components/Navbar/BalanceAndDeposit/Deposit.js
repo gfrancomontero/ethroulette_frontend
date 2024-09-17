@@ -27,7 +27,7 @@ export default function Deposit() {
       }
 
       const result = await response.json();
-      console.log('Backend response:', result);  // You can process the result if needed
+      console.log('The Next Server has Responded:', result);  // You can process the result if needed
     } catch (error) {
       console.error('Error sending transaction data to the backend:', error);
     }

@@ -30,11 +30,11 @@ export async function POST(request) {
     console.log('Backend response data:', responseData);
 
     if (!response.ok) {
-      throw new Error('TRANSACTION AA FAILED to send transaction to backend');
+      throw new Error('Miserably failed sending transaction to backend');
     }
 
     // Return the successful result
-    return NextResponse.json({ message: 'Transaction data received successfully', result: responseData });
+    return NextResponse.json({ status: 200, responseData });
   } catch (error) {
     console.error('Error processing transaction data:', error);
     return NextResponse.json({ message: 'Error processing transaction data', error }, { status: 500 });

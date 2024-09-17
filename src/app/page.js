@@ -1,3 +1,5 @@
+// src/app/page.js
+
 'use client';  // Ensure this is a client-side component
 
 import { useEffect, useState } from 'react';  // Include useState for grace period
