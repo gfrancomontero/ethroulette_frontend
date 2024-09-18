@@ -35,7 +35,7 @@ export default function DealerBalance() {
             <div>
               <p className="text-blue-500 font-mono">In Custody: {dealerBalance !== null ? `${dealerBalance} ETH` : 'Loading dealer balance...'}</p>
               <p className="text-green-500 font-mono">From Players: {totalUserBalances !== null ? `${totalUserBalances} ETH` : 'Loading user balances...'}</p>
-              <p className="text-purple-500 font-mono">At Risk: {effectiveDealerBalance !== null ? `${effectiveDealerBalance} ETH` : 'Calculating...'}</p>
+              <p className="text-purple-500 font-mono">Available to Gamble: {effectiveDealerBalance !== null ? `${effectiveDealerBalance} ETH` : 'Calculating...'}</p>
             </div>
           ) : (
             <p className="text-red-500">Socket Error: Unable to connect</p>
