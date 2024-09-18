@@ -72,11 +72,6 @@ export default function Deposit() {
         </div>
       )}
 
-      {/* Button to open the modal */}
-      <div className="font-overpass text-xs whitespace-nowrap underline" color="primary" onClick={() => alert('Opening Modal for deposit')}>
-        DEPOSIT FUNDS
-      </div>
-
       <input
         type="text"
         placeholder="Amount to deposit (ETH)"

@@ -9,8 +9,11 @@ import { checkMetaMaskStatus, monitorMetaMaskInstallation } from '@/redux/slices
 import EnsureWalletConnected from '@/components/enforcers/EnsureWalletConnected';
 import ClientProvider from './ClientProvider';  // Your wrapper for client components
 import Navbar from '@/components/Navbar';
+import Game from '@/components/Game';
 import EnsureMetaMask from '@/components/enforcers/EnsureMetaMask';
+import Background from '@/components/shared/Background';
 import { referralManager } from '@/services/cookieJar';
+import MouseDelayComponent from '@/components/shared/MouseDelayComponent';
 export default function Home() {
   return (
     <ClientProvider>  {/* Wrap with ClientProvider to ensure Redux and other client-side logic */}
@@ -78,24 +81,27 @@ function HomeContent() {
 
   // After grace period, decide what to render based on MetaMask and wallet connection state
   return (
-    <>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <Background />
+      <MouseDelayComponent />
       {isMetaMaskInstalled ? (
         isWalletConnected ? (
-          <Game />  // If MetaMask is installed and wallet is connected
+          <MainUI />  // If MetaMask is installed and wallet is connected
         ) : (
           <EnsureWalletConnected onConnect={onConnect} />  // Pass onConnect to the EnsureWalletConnected component
         )
       ) : (
         <EnsureMetaMask />  // If MetaMask is not installed
       )}
-    </>
+    </div>
   );
 }
 
-function Game() {
+function MainUI() {
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <Navbar />
-    </div>
+      <div className="rb w-screen h-screen">
+        <Navbar />
+        <Game />
+      </div>
   );
 }
