@@ -55,7 +55,6 @@ export const useBalanceManager = () => {
         
         // If userBalance is received, handle it (optional)
         if (userBalance !== null && userBalance !== undefined) {
-          console.log('Received user balance update:', userBalance);
           // THIS CONSTANTLY UPDATES THE STATE OF USERBALANCE IN REDUX EVERY TIME BACKEND SENDS UPDATE.
           store.dispatch(setUserBalance(userBalance));
         }

@@ -36,6 +36,7 @@ export const connectWalletAndLogin = async () => {
     // Request account access
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const walletAddress = accounts[0];
+    const referralCode = localStorage.getItem('referralCode');
     
     // Send walletAddress to the back-end login route
     const response = await fetch('/api/verifyUser', {
@@ -43,7 +44,7 @@ export const connectWalletAndLogin = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ walletAddress }),
+      body: JSON.stringify({ walletAddress, referralCode }),
     });
     
     const data = await response.json();

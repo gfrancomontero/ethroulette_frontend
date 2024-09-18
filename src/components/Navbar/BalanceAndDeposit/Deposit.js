@@ -11,28 +11,6 @@ export default function Deposit() {
 
   const minimumDeposit = config.MINIMUM_DEPOSIT;  // Get the minimum deposit from config
 
-  // Function to send the transaction data to the backend
-  const sendTransactionDataToBackend = async (transaction) => {
-    try {
-      const response = await fetch('/api/postMetaMaskTransaction', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(transaction),  // Send the transaction data to the backend
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to send transaction data to the backend');
-      }
-
-      const result = await response.json();
-      console.log('Backend response:', result);  // You can process the result if needed
-    } catch (error) {
-      console.error('Error sending transaction data to the backend:', error);
-    }
-  };
-
   // Handle the deposit process
   const handleDeposit = async () => {
     if (!depositAmount || isNaN(depositAmount)) {
@@ -77,13 +55,11 @@ export default function Deposit() {
       setTransactionData(transaction);
       setErrorMessage('');  // Clear error message on success
 
-      // Send the transaction data to the backend
-      await sendTransactionDataToBackend(transaction);
-
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
-      setLoading(false);  // Stop loading after the transaction is processed
+      // Ensure the loading state changes back after the transaction is processed or fails
+      setLoading(false);
     }
   };
 
