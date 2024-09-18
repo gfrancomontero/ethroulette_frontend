@@ -82,7 +82,6 @@ export default function MouseDelayComponent() {
         height: '100vh',
         width: '100vw',
         position: 'relative',
-        cursor: 'none', // Hide the cursor
       }}
     >
       {/* Pixie dust particles */}
@@ -99,7 +98,7 @@ export default function MouseDelayComponent() {
             borderRadius: '50%',
             transform: 'translate(-50%, -50%)',
             animation: 'fadeout 1s forwards', // Fade out after 1 second
-            zIndex: '1000',
+            zIndex: '0',
           }}
           />
         ))}

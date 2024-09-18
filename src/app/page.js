@@ -81,7 +81,7 @@ function HomeContent() {
 
   // After grace period, decide what to render based on MetaMask and wallet connection state
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen font-overpass">
       <Background />
       <MouseDelayComponent />
       {isMetaMaskInstalled ? (

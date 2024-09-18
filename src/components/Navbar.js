@@ -13,18 +13,6 @@ export default function App() {
       <BalanceManager />
       <MetaMaskBalance />
       <BalanceAndDeposit />
-      {/* <Button onPress={onOpen}>Internal Data</Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Here is why you can trust us</ModalHeader>
-              <ModalBody>
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal> */}
     </div>
   );
 }

@@ -1,8 +1,11 @@
+
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { connectMetaMask, fetchMetaMaskBalance } from '../../redux/slices/metaMaskUserBalanceSlice';
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 
 export default function MetaMaskBalance() {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const dispatch = useDispatch();
   const { account, balance, loading, error } = useSelector((state) => state.metaMaskUser);
 
@@ -60,12 +63,40 @@ export default function MetaMaskBalance() {
   }
 
   return (
-    <div className="text-center w-full">
-      <h3 className="text-sm font-overpass">Your Wallet:</h3>
-      <p className="text-blue-500 font-mono break-all">{account || 'No account connected'}</p>
-      <p className={`text-sm font-overpass mt-2 text-${balance > 0 ? 'green' : 'red'}-500`}>
-        MetaMask Balance: {balance} ETH
-      </p>
+    <div>
+    <Button className="nextUiButton" onPress={onOpen}>What we know about you</Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1 font-mono">Basically nothing.</ModalHeader>
+              <ModalBody>
+
+
+              <div className="flex flex-col space-y-4">
+                <div className="flex justify-between">
+                  <p className="text-pink font-mono">Your Metamask Wallet:</p>
+                  <p className="text-blue-500 font-mono">
+                    <a href={`https://etherscan.io/address/${account}`} target="_blank">
+                      🔗 ${account.slice(0, 5)}...${account.slice(-5)}
+                    </a>
+                  </p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-blue-500 font-mono">Your Balance:</p>
+                  <p className="text-blue-500 font-mono">
+                    {parseFloat(balance).toFixed(6)} ETH
+                  </p>
+                </div>
+                <br />
+              </div>
+
+
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 }
