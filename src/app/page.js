@@ -9,7 +9,7 @@ import { checkMetaMaskStatus, monitorMetaMaskInstallation } from '@/redux/slices
 import EnsureWalletConnected from '@/components/enforcers/EnsureWalletConnected';
 import ClientProvider from './ClientProvider';  // Your wrapper for client components
 import Navbar from '@/components/Navbar';
-import Game from '@/components/Game';
+import GameSelector from '@/components/GameSelector';
 import EnsureMetaMask from '@/components/enforcers/EnsureMetaMask';
 import Background from '@/components/shared/Background';
 import { referralManager } from '@/services/cookieJar';
@@ -76,7 +76,15 @@ function HomeContent() {
 
   // Render loading spinner or nothing while in grace period
   if (isLoading) {
-    return <div>Loading...</div>
+    return (
+      <div className="flex flex-col jca h-screen font-overpass">
+        <Background />
+        <MouseDelayComponent />
+        <div className="fixed h-screen flex flex-col jca">
+          <p className="text-white">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   // After grace period, decide what to render based on MetaMask and wallet connection state
@@ -101,7 +109,7 @@ function MainUI() {
   return (
       <div className="rb w-screen h-screen">
         <Navbar />
-        <Game />
+        <GameSelector />
       </div>
   );
 }
