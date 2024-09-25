@@ -41,11 +41,9 @@ export default function Betplacing() {
         {currentBetSize > 0 && canPlaceBet && <EarningsPotential betSize={currentBetSize} />}
         
         {/* Bet Size Controller to check if the bet can be placed */}
-        <BetSizeController 
-          canPlaceBet={canPlaceBet}
-          setCanPlaceBet={(canBet) => dispatch(setCanPlaceBet(canBet))}
-          currentBetSize={currentBetSize}
-        />
+
+        <BetSizeController />
+
       </div>
     </div>
   )

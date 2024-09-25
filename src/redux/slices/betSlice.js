@@ -14,8 +14,6 @@ const betSlice = createSlice({
     },
     setCurrentBetSize: (state, action) => {
       state.currentBetSize = action.payload
-      // Automatically update canPlaceBet based on bet size
-      state.canPlaceBet = action.payload > 0 && action.payload <= 1
     },
   },
 })
