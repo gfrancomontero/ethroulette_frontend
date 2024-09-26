@@ -1,3 +1,5 @@
+// src/components/enforcers/EnsureMetaMask.js
+
 import Link from 'next/link';
 
 export default function EnsureMetaMask() {

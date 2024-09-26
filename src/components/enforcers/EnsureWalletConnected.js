@@ -2,7 +2,7 @@
 
 export default function EnsureWalletConnected({ onConnect }) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center h-screen">
       <h2 className="text-xl font-semibold mb-4">Please connect your MetaMask wallet to continue</h2>
       <button
         onClick={onConnect}  // The onConnect function will trigger the MetaMask wallet connection

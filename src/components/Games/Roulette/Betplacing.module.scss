@@ -1,0 +1,22 @@
+.colorOption {
+  color: white;
+  width: 80px;
+  border: 1px solid pink;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.5; // default unselected state
+
+  &.selected {
+    opacity: 1;
+  }
+}
+
+.red {
+  background-color: rgb(255, 0, 85) !important;
+  margin-right: 1rem;
+}
+
+.black {
+  background-color: rgba(0, 40, 40, 0.87) !important;
+  margin-left: 1rem;
+}
