@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   canPlaceBet: false,
   currentBetSize: '',
+  selectedColor: '',
 }
 
 const betSlice = createSlice({
@@ -15,8 +16,11 @@ const betSlice = createSlice({
     setCurrentBetSize: (state, action) => {
       state.currentBetSize = action.payload
     },
+    setSelectedColor: (state, action) => {
+      state.selectedColor = action.payload
+    },
   },
 })
 
-export const { setCanPlaceBet, setCurrentBetSize } = betSlice.actions
+export const { setCanPlaceBet, setCurrentBetSize, setSelectedColor } = betSlice.actions
 export default betSlice.reducer
