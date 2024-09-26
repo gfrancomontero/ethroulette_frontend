@@ -3,9 +3,8 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 export default function Roulette() {
-  const { account, balance, canPlaceBet, currentBetSize, selectedColor } = useSelector((state) => ({
+  const { account, canPlaceBet, currentBetSize, selectedColor } = useSelector((state) => ({
     account: state.metaMaskUser.account,
-    balance: state.metaMaskUser.balance,
     canPlaceBet: state.bet.canPlaceBet,
     currentBetSize: state.bet.currentBetSize,
     selectedColor: state.bet.selectedColor,
@@ -26,7 +25,7 @@ export default function Roulette() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ account, balance, currentBetSize, selectedColor }), // Removed canPlaceBet
+        body: JSON.stringify({ account, currentBetSize, selectedColor }), // Removed canPlaceBet
       });
 
       const data = await response.json();

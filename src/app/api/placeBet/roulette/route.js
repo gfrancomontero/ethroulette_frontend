@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
   try {
     // Parse the data from the client-side request body
-    const { account, balance, currentBetSize, selectedColor } = await request.json();
+    const { account, currentBetSize, selectedColor } = await request.json();
 
     // Fetch the backend API URL and API Key from environment variables
     const backendApiUrl = process.env.BACKEND_API_URL;  // Moved to backend-only environment variable
@@ -13,8 +13,6 @@ export async function POST(request) {
       throw new Error('Missing backend API configuration');
     }
 
-    console.log('1 We made it this far!!')
-    console.log(backendApiUrl, apiKey, account, balance, currentBetSize, selectedColor)
     // Forward the request to your Express backend
     const response = await fetch(`${backendApiUrl}/api/placeBet/roulette`, {
       method: 'POST',
@@ -22,7 +20,7 @@ export async function POST(request) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({ account, balance, currentBetSize, selectedColor }),
+      body: JSON.stringify({ account, currentBetSize, selectedColor }),
     });
 
     // Try to parse the response
