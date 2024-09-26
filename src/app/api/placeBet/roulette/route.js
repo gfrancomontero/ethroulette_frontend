@@ -1,43 +1,44 @@
-// src/app/api/placeBet/route.js
-
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
   try {
-    // Parse the walletAddress from the request body
-    const { canPlaceBet, currentBetSize, showButton } = await request.json();
+    // Parse the data from the client-side request body
+    const { account, balance, currentBetSize, selectedColor } = await request.json();
 
-    // Fetch the backend API URL and API KEY from environment variables
-    const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+    // Fetch the backend API URL and API Key from environment variables
+    const backendApiUrl = process.env.BACKEND_API_URL;  // Moved to backend-only environment variable
     const apiKey = process.env.BACKEND_API_KEY;
 
+    if (!backendApiUrl || !apiKey) {
+      throw new Error('Missing backend API configuration');
+    }
+
+    console.log('1 We made it this far!!')
+    console.log(backendApiUrl, apiKey, account, balance, currentBetSize, selectedColor)
     // Forward the request to your Express backend
-    const response = await fetch(`${backendApiUrl}/api/users/login`, {
+    const response = await fetch(`${backendApiUrl}/api/placeBet/roulette`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({ canPlaceBet, currentBetSize, showButton }),
+      body: JSON.stringify({ account, balance, currentBetSize, selectedColor }),
     });
 
-    // Parse the response from the backend
+    // Try to parse the response
     const responseData = await response.json();
 
-    // Log the response status and data for debugging (optional)
-    console.log('Backend response status:', response.status);
-    console.log('Backend response data:', responseData);
-
-
     if (!response.ok) {
-      // Forward the error message from the backend
+      // Log the backend response and forward the error
+      console.error('Backend error:', responseData);
       return NextResponse.json(responseData, { status: response.status });
     }
 
-    // Return the successful result to the front-end
+    // Return the successful result to the frontend
     return NextResponse.json(responseData, { status: 200 });
+
   } catch (error) {
-    console.error('Error Placing Bet:', error);
+    console.error('Error placing bet:', error);
     return NextResponse.json({ message: 'Server error', error: error.message }, { status: 500 });
   }
 }

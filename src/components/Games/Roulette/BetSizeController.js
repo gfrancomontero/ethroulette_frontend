@@ -68,7 +68,7 @@ export default function BetSizeController() {
 
   return (
     <>
-      {showError && (
+      {showError && currentBetSize > 0 && (
         <div className={`text-red-500 mt-2 rounded-lg p-6 bg-slate-900	 ${styles.errorSection}`} >
           <p className="text-red-300">Can&apos;t place bet. Reason{errorMessages.length > 1 && 's'}:</p>
           <ol className="list-decimal pl-5">
