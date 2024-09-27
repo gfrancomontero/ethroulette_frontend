@@ -3,6 +3,7 @@ import React from 'react'
 import Background from './Background'
 import DefineBet from './DefineBet'
 import PlaceBet from './PlaceBet'
+import AnnounceResult from './AnnounceResult'
 
 
 export default function Roulette() {
@@ -11,6 +12,7 @@ export default function Roulette() {
       <Background />
       <DefineBet />
       <PlaceBet />
+      <AnnounceResult />
     </div>
   )
 }

@@ -26,9 +26,9 @@ export async function POST(request) {
     // Try to parse the response
     const responseData = await response.json();
 
+    console.error('Backend Response:', responseData);
     if (!response.ok) {
       // Log the backend response and forward the error
-      console.error('Backend error:', responseData);
       return NextResponse.json(responseData, { status: response.status });
     }
 

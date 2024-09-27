@@ -1,13 +1,17 @@
 import { Button } from '@nextui-org/react';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { setCurrentBetSize, setUserWins, setAnnounceResult, setWinningColor } from '@/redux/slices/betSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Roulette() {
-  const { account, canPlaceBet, currentBetSize, selectedColor } = useSelector((state) => ({
+  const dispatch = useDispatch();
+
+  const { account, canPlaceBet, currentBetSize, selectedColor, userWins } = useSelector((state) => ({
     account: state.metaMaskUser.account,
     canPlaceBet: state.bet.canPlaceBet,
     currentBetSize: state.bet.currentBetSize,
     selectedColor: state.bet.selectedColor,
+    userWins: state.bet.userWins,
   }));
 
   const [loading, setLoading] = useState(false);
@@ -34,9 +38,16 @@ export default function Roulette() {
         throw new Error(data.message || 'Failed to place bet');
       }
 
-      // Handle success (could show a success message, update UI, etc.)
+      // Handle success
       console.log('Bet placed successfully', data);
       
+      // Update Redux state
+      dispatch(setWinningColor(data.winningColor));
+      dispatch(setCurrentBetSize(''));
+      dispatch(setUserWins(data.userWins));
+      // show the result component
+      dispatch(setAnnounceResult(true));
+
     } catch (err) {
       console.error('Error placing bet:', err);
       setError(err.message || 'Error placing bet');
