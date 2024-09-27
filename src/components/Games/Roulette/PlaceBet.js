@@ -6,12 +6,11 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function Roulette() {
   const dispatch = useDispatch();
 
-  const { account, canPlaceBet, currentBetSize, selectedColor, userWins } = useSelector((state) => ({
+  const { account, canPlaceBet, currentBetSize, selectedColor } = useSelector((state) => ({
     account: state.metaMaskUser.account,
     canPlaceBet: state.bet.canPlaceBet,
     currentBetSize: state.bet.currentBetSize,
     selectedColor: state.bet.selectedColor,
-    userWins: state.bet.userWins,
   }));
 
   const [loading, setLoading] = useState(false);
