@@ -9,6 +9,7 @@ const initialState = {
   userWins: undefined,
   announceResult: false,
   winningColor: '',
+  lastBetSize: '',
 };
 
 const betSlice = createSlice({
@@ -33,8 +34,11 @@ const betSlice = createSlice({
     setWinningColor: (state, action) => {
       state.winningColor = action.payload;
     },
+    setLastBetSize: (state, action) => {
+      state.lastBetSize = action.payload;
+    },
   },
 });
 
-export const { setCanPlaceBet, setCurrentBetSize, setSelectedColor, setUserWins, setAnnounceResult, setWinningColor } = betSlice.actions;
+export const { setCanPlaceBet, setCurrentBetSize, setSelectedColor, setUserWins, setAnnounceResult, setLastBetSize, setWinningColor } = betSlice.actions;
 export default betSlice.reducer;

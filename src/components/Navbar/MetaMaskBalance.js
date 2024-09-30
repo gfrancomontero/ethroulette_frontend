@@ -1,8 +1,8 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { connectMetaMask, fetchMetaMaskBalance } from '../../redux/slices/metaMaskUserBalanceSlice';
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+import { connectMetaMask, fetchMetaMaskBalance } from '@/redux/slices/metaMaskUserBalanceSlice';
+import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure } from "@nextui-org/react";
 
 export default function MetaMaskBalance() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -83,7 +83,7 @@ export default function MetaMaskBalance() {
                   </p>
                 </div>
                 <div className="flex justify-between">
-                  <p className="text-blue-500 font-mono">Your Balance:</p>
+                  <p className="text-blue-500 font-mono">Your Metamask Balance:</p>
                   <p className="text-blue-500 font-mono">
                     {parseFloat(balance).toFixed(6)} ETH
                   </p>
