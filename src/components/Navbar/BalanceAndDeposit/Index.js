@@ -1,6 +1,6 @@
 // src/components/Navbar/Index.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import Deposit from './Deposit';
 import { useSelector } from 'react-redux';
 import {Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure} from "@nextui-org/react";
@@ -15,7 +15,10 @@ export default function Index() {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 font-mono">Deposit Eth</ModalHeader>
+              <ModalHeader className="flex flex-row font-mono w-100">
+                <div className="mr-6">Deposit Eth</div>
+                <div className="mr-6">Withdraw Eth</div>
+              </ModalHeader>
               <ModalBody>
                 <Deposit />
               </ModalBody>

@@ -16,8 +16,6 @@ export default function EarningsPotential({ betSize }) {
 
     getEthToUsdRate()
 
-    const interval = setInterval(getEthToUsdRate, 60000) // Update every minute
-    return () => clearInterval(interval) // Cleanup interval on component unmount
   }, [])
 
   const formatNumber = (num, decimals) => parseFloat(Number(num).toFixed(decimals)).toLocaleString()

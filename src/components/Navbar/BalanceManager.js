@@ -79,9 +79,9 @@ export default function DealerBalance() {
                         </div>
 
                         <div className="flex justify-between">
-                          <p className="text-pink font-mono">Contact the Engineer:</p>
+                          <p className="text-pink font-mono">Contact us:</p>
                           <p className="text-blue-500 font-mono">
-                            <a href="https://gonzalofranco.com" target="_blank">🔗 Gonzalo Franco</a>
+                            <a href="https://gonzalofranco.com" target="_blank">🔗 Click Here</a>
                           </p>
                         </div>
                         <br />

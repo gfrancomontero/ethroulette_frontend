@@ -1,6 +1,6 @@
 import { Button } from '@nextui-org/react';
 import { useState } from 'react';
-import { setCurrentBetSize, setUserWins, setAnnounceResult, setWinningColor } from '@/redux/slices/betSlice';
+import { setCurrentBetSize, setUserWins, setAnnounceResult, setWinningColor, setLastBetSize } from '@/redux/slices/betSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Roulette() {
@@ -46,6 +46,7 @@ export default function Roulette() {
       dispatch(setUserWins(data.userWins));
       // show the result component
       dispatch(setAnnounceResult(true));
+      dispatch(setLastBetSize(data.betSize))
 
     } catch (err) {
       console.error('Error placing bet:', err);
