@@ -15,9 +15,6 @@ export async function POST(request) {
     const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
     const apiKey = process.env.BACKEND_API_KEY;
 
-    // Log for debugging (optional)
-    console.log('Backend API URL:', backendApiUrl);
-    console.log('API Key:', apiKey);
 
     // Forward the request to your Express backend
     const response = await fetch(`${backendApiUrl}/api/users/login`, {
