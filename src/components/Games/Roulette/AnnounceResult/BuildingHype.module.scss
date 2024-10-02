@@ -1,0 +1,10 @@
+.hypeBuilder {
+  background: linear-gradient(135deg, #1e3b8a5b, #3b83f68f); /* Tailwind's blue gradients */
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}

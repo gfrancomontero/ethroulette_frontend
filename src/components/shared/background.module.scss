@@ -1,0 +1,53 @@
+.mainContainer {
+  background-color: #2f004a;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 175vh;
+    height: 175vh;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255, 225, 0, 0.2), rgba(255, 255, 255, 0) 60%);
+    transition: opacity 0.3s;
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+.neonImage {
+  transition: all 15s ease;
+  
+  left: -1px;
+  filter: drop-shadow(0 0 2rem rgba(255, 0, 149, 0.54));
+  max-height: 30vw;
+  /* Custom properties for dynamic effect */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  @media (min-width: 865px) {
+    opacity: 0.2;
+    &:hover {
+      left: -10vw;
+      opacity: 1;
+      filter: drop-shadow(calc(var(--mouse-x) * 0.05px) calc(var(--mouse-y) * 0.05px) 2rem rgba(0, 255, 255, 0.7));
+      max-height: 40vw;
+    }
+  }
+  @media (max-width: 864px) {
+    display: flex !important;
+    max-height: 20vh;
+    &:hover {
+      max-height: 60vh;
+      opacity: 1;
+      filter: drop-shadow(calc(var(--mouse-x) * 0.05px) calc(var(--mouse-y) * 0.05px) 2rem rgba(0, 255, 255, 0.7));
+    }
+  }
+}

@@ -1,0 +1,46 @@
+.userWins h1 {
+  animation: neonFlash 0.2s infinite alternate;
+  font-family: 'Arial', sans-serif; /* Set a font-family to enhance the neon effect */
+  text-shadow: 0 0 5px #fff, /* Basic shadow */
+               0 0 10px #fff, /* Glow shadow */
+               0 0 20px #fff, /* Intense glow */
+               0 0 40px yellow, /* Neon color 1 */
+               0 0 80px pink, /* Neon color 2 */
+               0 0 120px violet, /* Neon color 3 */
+               0 0 200px blue; /* Neon color 4 */
+}
+
+@keyframes neonFlash {
+  0% {
+    color: yellow;
+    text-shadow: 0 0 10px yellow, 0 0 20px yellow, 0 0 30px yellow, 0 0 40px yellow;
+  }
+  20% {
+    color: pink;
+    text-shadow: 0 0 10px pink, 0 0 20px pink, 0 0 30px pink, 0 0 40px pink;
+  }
+  40% {
+    color: violet;
+    text-shadow: 0 0 10px violet, 0 0 20px violet, 0 0 30px violet, 0 0 40px violet;
+  }
+  60% {
+    color: white;
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white;
+  }
+  80% {
+    color: electricblue;
+    text-shadow: 0 0 10px electricblue, 0 0 20px electricblue, 0 0 30px electricblue, 0 0 40px electricblue;
+  }
+  100% {
+    color: electricgreen;
+    text-shadow: 0 0 10px electricgreen, 0 0 20px electricgreen, 0 0 30px electricgreen, 0 0 40px electricgreen;
+  }
+}
+
+.red {
+  background-color: rgb(255, 0, 85);
+}
+
+.black {
+  background-color: rgba(0, 40, 40, 0.87);
+}
