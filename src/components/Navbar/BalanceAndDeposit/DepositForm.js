@@ -29,7 +29,7 @@ export default function DepositForm({ depositAmount, setDepositAmount, handleDep
       </p>
 
       <small className="text-blue-300 font-overpass flex text-center mt-4">
-        After making a deposit, your balance will be credited, and you'll receive full transaction details to check on Etherscan. Additionally, this is a hobby project. We coded it the best we colud, but we aren't responsible for your ETH, or malfunctions. This project works, but it is not being maintained, nor there is a support team. You hereby agree that you may lose all your ETH, and that's okay with you.
+        After making a deposit, your balance will be credited, and you&apos;ll receive full transaction details to check on Etherscan. Additionally, this is a hobby project. We coded it the best we colud, but we aren&apos;t responsible for your ETH, or malfunctions. This project works, but it is not being maintained, nor there is a support team. You hereby agree that you may lose all your ETH, and that&apos;s okay with you.
       </small>
       <small className="text-center">
         {errorMessage && <ErrorMessage message={writeError(errorMessage)} />}

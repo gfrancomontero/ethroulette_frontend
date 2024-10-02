@@ -86,7 +86,7 @@ export default function DealerBalance() {
                         </div>
 
                         <div className="flex justify-between">
-                          <small className="text-grey font-mono">Despite the information above, you should know this is a hobby project. We aren't responsible for your ETH, or malfunctions. This project works, but it is not being maintained, nor there is a support team.</small>
+                          <small className="text-grey font-mono">Despite the information above, you should know this is a hobby project. We aren&apos;t responsible for your ETH, or malfunctions. This project works, but it is not being maintained, nor there is a support team.</small>
                         </div>
 
                         <br />
