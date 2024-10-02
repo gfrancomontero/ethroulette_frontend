@@ -1,6 +1,6 @@
 // src/components/Navbar/Index.js
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Deposit from './Deposit';
 import Withdraw from './Withdraw';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,10 @@ export default function Index() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const userBalance = useSelector((state) => state.userBalance.balance);
   const [transactionType, setTransactionType] = useState('deposit')
+
+  useEffect(() => {
+    setTransactionType('deposit')
+  }, [isOpen])
 
   return (
     <div className="text-end rbp-2">

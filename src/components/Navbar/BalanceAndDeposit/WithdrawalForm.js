@@ -34,7 +34,7 @@ export default function WithdrawalForm({ handleWithdrawal, userBalance, errorMes
         console.log(`Dealer address: ${dealerAddress}`);
 
         // Estimate gas fees
-        const gasFeeInEth = await estimateGasFees(account, dealerAddress, userBalance);
+        const gasFeeInEth = await estimateGasFees(dealerAddress, account, userBalance);
         setGasFee(gasFeeInEth);
         console.log(`Gas fee estimated: ${gasFeeInEth} ETH`);
 
@@ -70,11 +70,12 @@ export default function WithdrawalForm({ handleWithdrawal, userBalance, errorMes
       setSecondsLeft((prevSeconds) => {
         if (prevSeconds === 1) {
           calculateGasFee(); // Recalculate gas fees when countdown reaches 0
-          return 10; // Reset the countdown timer
+          return 20; // Reset the countdown timer
         }
         return prevSeconds - 1; // Decrease the countdown timer
       });
-    }, 1000); // 1 second interval for countdown
+    }, 20000
+  ); // 1 second interval for countdown
 
     // Clear interval when component unmounts or dependencies change
     return () => clearInterval(intervalId);
