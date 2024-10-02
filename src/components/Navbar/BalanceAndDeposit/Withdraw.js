@@ -4,8 +4,6 @@ import { initializeWeb3, connectWalletAndLogin } from '@/services/web3';
 import WithdrawalForm from './WithdrawalForm';
 import TransactionDetails from './TransactionDetails';
 import LoadingOverlay from './LoadingOverlay';
-import config from '@/config/config';
-import ErrorMessage from './ErrorMessage';
 
 export default function Withdrawal({ onClose }) {
   const [withdrawalAmount, setWithdrawalAmount] = useState('');
@@ -16,7 +14,8 @@ export default function Withdrawal({ onClose }) {
 
   // Handle the withdrawal request
   const handleWithdrawal = async () => {
-    if (!validateWithdrawal(withdrawalAmount, userBalance, setErrorMessage)) return;
+
+    if (!validateWithdrawal(userBalance, setErrorMessage)) return;
 
     setLoading(true);
     try {
@@ -31,12 +30,12 @@ export default function Withdrawal({ onClose }) {
       const from = await connectWalletAndLogin();
 
       // Send the withdrawal request to the back-end API
-      const response = await requestWithdrawal(from, withdrawalAmount);
+      const response = await requestWithdrawal(from, userBalance);
 
       if (response.success) {
         setTransactionData({
           ...response.transaction,
-          amount: withdrawalAmount,
+          amount: userBalance,
         });
         setErrorMessage('');
       } else {
@@ -69,16 +68,16 @@ export default function Withdrawal({ onClose }) {
 }
 
 // Utility function for withdrawal validation
-const validateWithdrawal = (amount, userBalance, setErrorMessage) => {
-  if (!amount || isNaN(amount)) {
+const validateWithdrawal = (userBalance, setErrorMessage) => {
+  if (!userBalance || isNaN(userBalance)) {
     setErrorMessage('Please enter a valid amount of ETH.');
     return false;
   }
-  if (parseFloat(amount) <= 0) {
+  if (parseFloat(userBalance) <= 0) {
     setErrorMessage('Withdrawal amount must be greater than zero.');
     return false;
   }
-  if (parseFloat(amount) > userBalance) {
+  if (parseFloat(userBalance) > userBalance) {
     setErrorMessage('Insufficient balance for this withdrawal.');
     return false;
   }

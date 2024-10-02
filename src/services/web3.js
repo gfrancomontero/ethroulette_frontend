@@ -92,3 +92,34 @@ export const sendTransaction = async (from, to, amount) => {
     throw new Error(`Transaction failed: ${error.message}`);
   }
 };
+
+export const estimateGasFees = async (from, to, amountInEth) => {
+  if (!web3) throw new Error('Web3 is not initialized. Please connect your wallet first.');
+  console.log(`Estimating gas fees for transaction from ${from} to ${to} with amount: ${amountInEth} ETH`);
+
+  // Convert amount to Wei (smallest denomination of Ether)
+  const valueInWei = web3.utils.toWei(amountInEth.toString(), 'ether');
+  console.log(`Converted amount to Wei: ${valueInWei}`);
+
+  try {
+    // Get the current gas price from the Web3 provider
+    const gasPrice = await web3.eth.getGasPrice();
+    console.log(`Retrieved gas price: ${gasPrice} Wei`);
+
+    // Estimate the gas required for the transaction
+    const estimatedGas = await web3.eth.estimateGas({ from, to, value: valueInWei });
+    console.log(`Estimated gas required for the transaction: ${estimatedGas} units`);
+
+    // Calculate gas fee in ETH
+    const gasFeeInWei = BigInt(gasPrice) * BigInt(estimatedGas);
+    console.log(`Calculated gas fee in Wei: ${gasFeeInWei}`);
+
+    const gasFeeInEth = web3.utils.fromWei(gasFeeInWei.toString(), 'ether');
+    console.log(`Converted gas fee to ETH: ${gasFeeInEth} ETH`);
+
+    return gasFeeInEth;
+  } catch (error) {
+    console.error(`Error while estimating gas fees: ${error.message}`);
+    throw new Error(`Failed to estimate gas fees: ${error.message}`);
+  }
+};
