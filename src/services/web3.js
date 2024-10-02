@@ -92,3 +92,51 @@ export const sendTransaction = async (from, to, amount) => {
     throw new Error(`Transaction failed: ${error.message}`);
   }
 };
+
+export const estimateGasFees = async (from, to, amountInEth) => {
+  if (!web3) throw new Error('Web3 is not initialized. Please connect your wallet first.');
+  
+  console.log(`Estimating gas fees for transaction from ${from} to ${to} with amount: ${amountInEth} ETH`);
+
+  // Convert amount to Wei (smallest denomination of Ether)
+  const valueInWei = web3.utils.toWei(amountInEth.toString(), 'ether');
+  console.log(`Converted amount to Wei: ${valueInWei}`);
+
+  try {
+    // Get the current gas price from the Web3 provider
+    const gasPrice = await web3.eth.getGasPrice();
+    console.log(`Retrieved gas price: ${gasPrice} Wei`);
+    
+    // Optionally, reduce gas price to avoid high fees (e.g., use 90% of the current gas price)
+    const reducedGasPrice = BigInt(gasPrice) * BigInt(90) / BigInt(100); 
+    console.log(`Reduced gas price (90% of current): ${reducedGasPrice} Wei`);
+
+    // Estimate the gas required for the transaction
+    const estimatedGas = await web3.eth.estimateGas({ from, to, value: valueInWei });
+    console.log(`Estimated gas required for the transaction: ${estimatedGas} units`);
+
+    // Calculate gas fee in Wei
+    const gasFeeInWei = reducedGasPrice * BigInt(estimatedGas);
+    console.log(`Calculated gas fee in Wei: ${gasFeeInWei}`);
+
+    // Convert gas fee from Wei to ETH
+    const gasFeeInEth = web3.utils.fromWei(gasFeeInWei.toString(), 'ether');
+    console.log(`Converted gas fee to ETH: ${gasFeeInEth} ETH`);
+
+    // Check if the account has enough balance to cover the value and gas fees
+    const accountBalance = await web3.eth.getBalance(from);
+    console.log(`Account balance: ${web3.utils.fromWei(accountBalance, 'ether')} ETH`);
+
+    // Calculate total required (value + gas fees)
+    const totalRequired = BigInt(valueInWei) + gasFeeInWei;
+    if (BigInt(accountBalance) < totalRequired) {
+      const requiredInEth = web3.utils.fromWei(totalRequired.toString(), 'ether');
+      throw new Error(`Insufficient funds: You need at least ${requiredInEth} ETH (including gas fees) to complete this transaction.`);
+    }
+
+    return gasFeeInEth;
+  } catch (error) {
+    console.error(`Error while estimating gas fees: ${error.message}`);
+    throw new Error(`Failed to estimate gas fees: ${error.message}`);
+  }
+};
