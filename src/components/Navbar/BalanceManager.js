@@ -71,19 +71,19 @@ export default function DealerBalance() {
                           </p>
                         </div>
 
-                        <div className="flex justify-between">
+                        {/* <div className="flex justify-between">
                           <p className="text-pink font-mono">Check the Code:</p>
                           <p className="text-blue-500 font-mono">
                             <a href="https://github.com/gfrancomontero/ethroulette_frontend" target="_blank">🔗 GitHub</a>
                           </p>
                         </div>
 
-                        <div className="flex justify-between">
+                        {/* <div className="flex justify-between">
                           <p className="text-pink font-mono">Contact us:</p>
                           <p className="text-blue-500 font-mono">
                             <a href="https://gonzalofranco.com" target="_blank">🔗 Click Here</a>
                           </p>
-                        </div>
+                        </div> */}
 
                         <div className="flex justify-between">
                           <small className="text-grey font-mono">Despite the information above, you should know this is a hobby project. We aren&apos;t responsible for your ETH, or malfunctions. This project works, but it is not being maintained, nor there is a support team.</small>
