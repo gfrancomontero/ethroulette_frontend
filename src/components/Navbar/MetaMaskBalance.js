@@ -63,7 +63,7 @@ export default function MetaMaskBalance() {
   }
 
   return (
-    <div>
+    <div className="sm:w-[300px]">
     <Button className="nextUiButton" onPress={onOpen}>What we know about you</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>

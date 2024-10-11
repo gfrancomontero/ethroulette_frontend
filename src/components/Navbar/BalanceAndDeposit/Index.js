@@ -16,7 +16,7 @@ export default function Index() {
   }, [isOpen])
 
   return (
-    <div className="text-end rbp-2">
+    <div className="sm:text-end">
       <Button className="nextUiButton" onPress={onOpen}>Your Balance: {parseFloat(userBalance).toFixed(6)} ETH</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>

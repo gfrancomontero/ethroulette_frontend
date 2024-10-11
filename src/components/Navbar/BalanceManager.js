@@ -27,7 +27,7 @@ export default function DealerBalance() {
   }, []);
 
   return (
-    <div>
+    <div className="sm:w-[300px]">
       <Button className="nextUiButton" onPress={onOpen}>Why you can trust us</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
