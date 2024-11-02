@@ -16,12 +16,12 @@ export default function DepositForm({ depositAmount, setDepositAmount, handleDep
           onChange={(e) => setDepositAmount(e.target.value)}
           className="border border-gray-300 px-3 py-2 rounded-md w-full font-overpass"
         />
-        <button
+        {/* <button
           onClick={handleDeposit}
           className="bg-transparent border-pink text-pink hover:underline px-2 py-1 ml-2"
         >
           Deposit
-        </button>
+        </button> */}
       </div>
 
       <p className="text-right text-blue-500 font-mono mt-2">
